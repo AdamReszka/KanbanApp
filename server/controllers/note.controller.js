@@ -45,7 +45,7 @@ export function updateNote(req, res) {
 export function deleteNote(req, res) {
   Lane.findOne({ id: req.params.laneId })
     .then(lane => {
-      const newNotes = lane.notes.filter(element => element.id != req.params.noteId;);
+      const newNotes = lane.notes.filter(element => element.id != req.params.noteId);
       lane.notes = newNotes;
         lane.save(() => {
           Note.findOne({ id: req.params.noteId})
