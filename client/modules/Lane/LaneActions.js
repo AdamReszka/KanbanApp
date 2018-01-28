@@ -1,7 +1,7 @@
-import uuid from 'uuid';
 import callApi from '../../util/apiCaller';
 import { lanes } from '../../util/schema';
 import { normalize } from 'normalizr';
+import { CREATE_NOTES } from '../Note/NoteActions';
 // Export Constants
 export const CREATE_LANES = 'CREATE_LANES';
 export const CREATE_LANE = 'CREATE_LANE';
@@ -20,11 +20,19 @@ export function createLane(lane) {
   return {
     type: CREATE_LANE,
     lane: {
-      id: uuid(),
+      notes: lane.notes || [],
       ...lane,
     }
   };
 }
+
+export function createLaneRequest(lane) {
+  return (dispatch) => {
+    return callApi('lanes', 'post', lane).then(res => {
+      dispatch(createLane(res));
+    });
+  };
+};
 
 export function updateLane(laneId) {
   return {
@@ -32,6 +40,14 @@ export function updateLane(laneId) {
     lane,
   };
 }
+
+export function updateLaneRequest(laneId) {
+  return (dispatch) => {
+    return callApi('lanes/:laneId', 'put', lane).then(res => {
+      dispatch(updateLane(res));
+    });
+  };
+};
 
 export function editLane(laneId) {
   return {
@@ -47,12 +63,21 @@ export function deleteLane(laneId) {
   };
 }
 
+export function deleteLaneRequest(laneId) {
+  return (dispatch) => {
+    return callApi('lanes/:laneId', 'delete', lane).then(res => {
+      dispatch(deleteLane(res));
+    });
+  };
+};
+
 export function fetchLanes() {
   return (dispatch) => {
     return callApi('lanes').then(res => {
       const normalized = normalize(res.lanes, lanes);
-      const {lanes: normalizedLanes} = normalized.entities;
+      const {lanes: normalizedLanes, notes } = normalized.entities;
       dispatch(createLanes(normalizedLanes));
+      dispatch(createNotes(notes));
     });
   };
 }
