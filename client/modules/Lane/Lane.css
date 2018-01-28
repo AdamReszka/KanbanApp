@@ -1,1 +1,6 @@
 /* Lane styles */
+.Lane{
+  background-color: green;
+  min-width: 300px;
+  min-height: 100px;
+}
