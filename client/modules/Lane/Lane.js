@@ -1,6 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import NotesContainer from '../Note/NotesContainer';
 import Edit from '../../components/Edit';
 
@@ -8,7 +6,7 @@ import Edit from '../../components/Edit';
 import styles from './Lane.css';
 
 const Lane = (props) => {
-  const { lane, laneNotes, updateLane, addNote, deleteLane } = props;
+  const { lane, laneNotes, updateLane, addNote, deleteLane, editLane } = props;
   const laneId = lane.id;
 
   return (
@@ -42,22 +40,7 @@ Lane.propTypes = {
   addNote: PropTypes.func,
   updateLane: PropTypes.func,
   deleteLane: PropTypes.func,
+  editLane: PropTypes.func
 };
 
 export default Lane;
-
-//const mapStateToProps = (state) => {
-//  return {};
-//};
-
-//const mapDispatchToProps = (dispatch) => {
-//  return {};
-//};
-
-//Lane.propTypes = {
-//};
-
-//export default connect(
-//  mapStateToProps,
-//  mapDispatchToProps
-//)(Lane);
