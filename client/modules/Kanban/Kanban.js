@@ -1,4 +1,4 @@
-import { createLaneRequest } from '../Lane/LaneActions';
+import { createLaneRequest, fetchLanes } from '../Lane/LaneActions';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';

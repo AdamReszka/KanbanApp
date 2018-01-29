@@ -7,7 +7,7 @@ import Edit from '../../components/Edit';
 // Import Style
 import styles from './Lane.css';
 
-const Lane = (props) = {
+const Lane = (props) => {
   const { lane, laneNotes, updateLane, addNote, deleteLane } = props;
   const laneId = lane.id;
 
