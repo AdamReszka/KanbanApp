@@ -8,18 +8,19 @@ export default function notes(state = initialState, action) {
   switch (action.type) {
     case CREATE_NOTE:
     case UPDATE_NOTE:
-      return { ...state, [action.note.id]: action.note };
+      const newState = { ...state, [action.note.id]: action.note };
+      return newState;
 
     case EDIT_NOTE: {
-      const note = { ...state[action.id], editing: true };
-      return { ...state, [action.id]: note };
+      const note = { ...state[action.noteId], editing: true };
+      return { ...state, [action.noteId]: note };
     }
 
     case DELETE_NOTE:
       return omit(state, action.noteId);
 
     case CREATE_NOTES:
-    return { ...action.notes };
+      return { ...action.notes };
 
     default:
       return state;

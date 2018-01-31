@@ -6,6 +6,7 @@ export const CREATE_NOTES = 'CREATE_NOTES';
 export const UPDATE_NOTE = 'UPDATE_NOTE';
 export const EDIT_NOTE = 'EDIT_NOTE';
 export const DELETE_NOTE = 'DELETE_NOTE';
+export const MOVE_WITHIN_LANE = 'MOVE_NOTES';
 
 // Export Actions
 export function createNote(note, laneId) {
@@ -13,6 +14,7 @@ export function createNote(note, laneId) {
     type: CREATE_NOTE,
     laneId,
     note,
+    editing: false
   };
 }
 
@@ -40,8 +42,8 @@ export function updateNote(note) {
 
 export function updateNoteRequest(note, laneId) {
   return (dispatch) => {
-    return callApi('notes/:noteId', 'put', { note, laneId }).then(noteResp => {
-      dispatch(updateNote(noteResp, laneId));
+    return callApi(`notes/${note.id}`, 'put', { note, laneId }).then(noteResp => {
+      dispatch(updateNote(note, laneId));
     });
   };
 }
@@ -62,10 +64,19 @@ export function deleteNote(noteId, laneId) {
   };
 }
 
-export function deleteNoteRequest(noteId, laneId) {
+export function deleteNoteRequest(note, laneId) {
   return (dispatch) => {
-    return callApi('notes/:noteId', 'delete', { note, laneId }).then(noteResp => {
-      dispatch(deleteNote(noteResp, laneId));
+    return callApi(`lanes/${laneId}/notes/${note.id}`, 'delete', { note, laneId }).then(noteResp => {
+      dispatch(deleteNote(note.id, laneId));
     });
   };
+}
+
+export function moveWithinLane(laneId, targetId, sourceId) {
+  return {
+    type: MOVE_WITHIN_LANE,
+    laneId,
+    targetId,
+    sourceId,
+  }
 }
