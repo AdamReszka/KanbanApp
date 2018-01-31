@@ -4,8 +4,8 @@ import Lane from './LaneContainer.js';
 const Lanes = ({ lanes }) => {
   return (
     <div className="lanes">
-      {lanes.map(lane =>
-        <Lane className="lane" key={lane.id} lane={lane} />
+      {lanes.map((lane, id) =>
+        <Lane className="lane" key={id} lane={lane} />
       )}
     </div>
   );

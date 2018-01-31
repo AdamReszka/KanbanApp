@@ -22,6 +22,7 @@ export function createLane(lane) {
     type: CREATE_LANE,
     lane: {
       notes: lane.notes || [],
+      editing: false,
       ...lane,
     }
   };
@@ -35,20 +36,20 @@ export function createLaneRequest(lane) {
   };
 };
 
-export function updateLane(laneId) {
+export function updateLane(lane) {
   return {
     type: UPDATE_LANE,
     lane,
   };
 }
 
-export function updateLaneRequest(laneId) {
+export function updateLaneRequest(lane) {
   return (dispatch) => {
-    return callApi('lanes/:laneId', 'put', lane).then(res => {
-      dispatch(updateLane(res));
+    return callApi(`lanes/${lane.id}`, 'put', lane).then(res => {
+      dispatch(updateLane(lane));
     });
   };
-};
+}
 
 export function editLane(laneId) {
   return {
@@ -64,10 +65,10 @@ export function deleteLane(laneId) {
   };
 }
 
-export function deleteLaneRequest(laneId) {
+export function deleteLaneRequest(lane) {
   return (dispatch) => {
-    return callApi('lanes/:laneId', 'delete', lane).then(res => {
-      dispatch(deleteLane(res));
+    return callApi(`lanes/${lane.id}`, 'delete', lane).then(res => {
+      dispatch(deleteLane(lane.id));
     });
   };
 };
