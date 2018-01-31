@@ -34,7 +34,7 @@ export function addNote(req, res) {
 }
 
 export function updateNote(req, res) {
-  Note.findOneAndUpdate({ id: req.params.noteId }, { $set: { task: req.body.name }}).exec((err, note) => {
+  Note.findOneAndUpdate({ id: req.params.noteId }, { $set: { task: req.body.note.task }}).exec((err, note) => {
     if (err) {
       res.status(500).send(err);
     }

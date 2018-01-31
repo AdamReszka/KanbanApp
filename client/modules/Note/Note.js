@@ -6,18 +6,8 @@ import { bindActionCreators } from 'redux';
 import styles from './Note.css';
 
 const Note = props =>
-  <li className={styles.Note} {...props}>{props.children}</li>;
+  <li className={styles.Note}>{props.children}</li>;
 
-
-
-/*const mapStateToProps = (state) => {
-  return {};
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-*/
 Note.propTypes = {
   children: PropTypes.any,
 };
