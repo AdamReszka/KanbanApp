@@ -7,6 +7,7 @@ const mapDispatchToProps = {
    updateNote: updateNoteRequest,
    createNotes,
    moveWithinLane,
+   editNote,
    onValueClick: editNote
 };
 

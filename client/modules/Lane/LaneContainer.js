@@ -10,7 +10,7 @@ const noteTarget = {
   hover(targetProps, monitor) {
     const sourceProps = monitor.getItem();
     const { id: noteId, laneId: sourceLaneId } = sourceProps;
-
+ 
     if (!targetProps.lane.notes.length) {
       targetProps.moveBetweenLanes(
         targetProps.lane.id,
@@ -19,7 +19,7 @@ const noteTarget = {
       );
     }
   },
-};
+ };
 
 const mapStateToProps = (state, ownProps) => {
   return {
