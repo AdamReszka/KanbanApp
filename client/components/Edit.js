@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import styles from '../modules/Lane/Lane.css';
+
 export default class Edit extends Component {
   checkEnter = (e) => {
     if (e.key === 'Enter') {
@@ -14,13 +16,17 @@ export default class Edit extends Component {
     }
   };
   renderDelete = () => {
-    return <button onClick={this.props.onDelete}>x</button>;
+    return (
+      <div className={styles.NoteHeader}>
+        <button className={styles.DeleteNote} onClick={this.props.onDelete}>x</button>
+      </div>
+    );
   };
   renderValue = () => {
     const { value, onDelete, onValueClick } = this.props;
 
     return (
-      <div>
+      <div className={styles.DeleteBox}>
         <span onClick={onValueClick}>{value}</span>
         {onDelete ? this.renderDelete() : null}
       </div>
@@ -39,7 +45,7 @@ export default class Edit extends Component {
   };
   render() {
     return (
-      <div>
+      <div className={styles.NameOfLane}>
         {this.props.editing ? this.renderEdit() : this.renderValue()}
       </div>
     );

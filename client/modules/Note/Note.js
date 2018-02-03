@@ -8,6 +8,10 @@ import ItemTypes from '../Kanban/itemTypes';
 import styles from './Note.css';
 
 class Note extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
   render() {
     const {connectDragSource, connectDropTarget, isDragging, editing, children} = this.props;
     const dragSource = editing ? a => a : connectDragSource;
@@ -15,7 +19,7 @@ class Note extends React.Component {
       <li className={styles.Note}
         style={{
           opacity: isDragging ? 0 : 1
-        }} >{props.children}</li>
+        }} >{children}</li>
     ));
   }
 }

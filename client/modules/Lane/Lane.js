@@ -6,16 +6,19 @@ import Edit from '../../components/Edit';
 import styles from './Lane.css';
 
 class Lane extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.props = props;
+  }
+
   render() {
-    const { connectDropTarget, connectlane, laneNotes, updateLane, addNote, deleteLane, editLane } = props;
+    const { lane, connectDropTarget, connectlane, laneNotes, updateLane, addNote, deleteLane, editLane } = this.props;
     const laneId = lane.id;
 
     return connectDropTarget(
       <div className={styles.Lane}>
         <div className={styles.LaneHeader}>
-          <div className={styles.LaneAddNote}>
-            <button onClick={() => addNote({ task: 'New Note' }, laneId)}>Add Note</button>
-          </div>
           <Edit
             className={styles.LaneName}
             editing={lane.editing}
@@ -23,8 +26,13 @@ class Lane extends React.Component {
             onValueClick={() => editLane(lane.id)}
             onUpdate={name => updateLane({ ...lane, name, editing: false })}
           />
-          <div className={styles.LaneDelete}>
-            <button onClick={() => deleteLane(lane)}>Remove Lane</button>
+          <div className={styles.LaneControls}>
+            <div className={styles.LaneAddNote}>
+              <button className={styles.AddNote} onClick={() => addNote({ task: 'New Note' }, laneId)}>Nowa notka</button>
+            </div>
+            <div className={styles.LaneDelete}>
+              <button className={styles.RemoveNote} onClick={() => deleteLane(lane)}>Usuń tablicę</button>
+            </div>
           </div>
         </div>
         <NotesContainer

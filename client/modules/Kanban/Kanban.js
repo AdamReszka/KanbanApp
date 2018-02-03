@@ -4,18 +4,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Lanes from '../Lane/Lanes';
-import styles from '../Lane/Lane.css';
+import styles from './Kanban.css';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 const Kanban = (props) => (
-  <div>
-    <button
-      className={styles.AddLane}
-      onClick={() => props.createLane({
-        name: 'New lane',
-      })}
-      >Add lane</button>
+  <div className={styles.kanbanContainer}>
+    <nav className={styles.mainNav}>
+      <button
+        className={styles.AddLane}
+        onClick={() => props.createLane({
+          name: 'New lane',
+        })}
+        >Nowa tablica</button>
+      </nav>
     <Lanes lanes={props.lanes} />
   </div>
 );
