@@ -1,5 +1,5 @@
 import * as laneActions from './LaneActions';
-import { createNoteRequest } from '../Note/NoteActions';
+import { createNoteRequest, moveBetweenLanes } from '../Note/NoteActions';
 import { connect } from 'react-redux';
 import Lane from './Lane';
 import { compose } from 'redux';
@@ -13,10 +13,10 @@ const noteTarget = {
 
     if (!targetProps.lane.notes.length) {
       targetProps.moveBetweenLanes(
-        targetProps.lane.id,
-        noteId,
-        sourceLaneId,
-      );
+       targetProps.lane.id,
+       noteId,
+       sourceLaneId,
+     );
     }
   },
 };
@@ -32,6 +32,7 @@ const mapDispatchToProps = {
   updateLane: laneActions.updateLaneRequest,
   deleteLane: laneActions.deleteLaneRequest,
   addNote: createNoteRequest,
+  moveBetweenLanes
 };
 
 export default compose(

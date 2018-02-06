@@ -1,7 +1,6 @@
 import callApi from '../../util/apiCaller';
 import { lanes } from '../../util/schema';
 import { normalize } from 'normalizr';
-import { CREATE_NOTES } from '../Note/NoteActions';
 import { createNotes } from '../Note/NoteActions';
 // Export Constants
 export const CREATE_LANES = 'CREATE_LANES';
@@ -9,16 +8,16 @@ export const CREATE_LANE = 'CREATE_LANE';
 export const UPDATE_LANE = 'UPDATE_LANE';
 export const EDIT_LANE = 'EDIT_LANE';
 export const DELETE_LANE = 'DELETE_LANE';
-export const MOVE_BETWEEN_LANES = 'MOVE_BETWEEN_LANES';
-// Export Actions
+export const MOVE_WITHIN_LANE = 'MOVE_NOTES';
 
-export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
+// Export Actions
+export function moveWithinLane(laneId, targetId, sourceId) {
   return {
-    type: MOVE_BETWEEN_LANES,
-    targetLaneId,
-    noteId,
-    sourceLaneId,
-  };
+    type: MOVE_WITHIN_LANE,
+    laneId,
+    targetId,
+    sourceId,
+  }
 }
 
 export function createLanes(lanesData) {
