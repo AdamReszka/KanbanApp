@@ -6,7 +6,7 @@ export const CREATE_NOTES = 'CREATE_NOTES';
 export const UPDATE_NOTE = 'UPDATE_NOTE';
 export const EDIT_NOTE = 'EDIT_NOTE';
 export const DELETE_NOTE = 'DELETE_NOTE';
-export const MOVE_WITHIN_LANE = 'MOVE_NOTES';
+export const MOVE_BETWEEN_LANES = 'MOVE_BETWEEN_LANES';
 
 // Export Actions
 export function createNote(note, laneId) {
@@ -48,11 +48,10 @@ export function updateNoteRequest(note, laneId) {
   };
 }
 
-export function editNote(noteId, laneId) {
+export function editNote(noteId) {
   return {
     type: EDIT_NOTE,
-    noteId,
-    laneId,
+    noteId
   }
 }
 
@@ -72,11 +71,11 @@ export function deleteNoteRequest(note, laneId) {
   };
 }
 
-export function moveWithinLane(laneId, targetId, sourceId) {
+export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
   return {
-    type: MOVE_WITHIN_LANE,
-    laneId,
-    targetId,
-    sourceId,
-  }
+    type: MOVE_BETWEEN_LANES,
+    targetLaneId,
+    noteId,
+    sourceLaneId,
+  };
 }

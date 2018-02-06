@@ -1,6 +1,6 @@
 // Import Actions
-import { CREATE_LANE, CREATE_LANES, UPDATE_LANE, EDIT_LANE, DELETE_LANE, MOVE_BETWEEN_LANES } from './LaneActions';
-import { CREATE_NOTE, DELETE_NOTE, EDIT_NOTE, MOVE_WITHIN_LANE } from '../Note/NoteActions';
+import { CREATE_LANE, CREATE_LANES, UPDATE_LANE, EDIT_LANE, DELETE_LANE, MOVE_WITHIN_LANE} from './LaneActions';
+import { CREATE_NOTE, DELETE_NOTE, EDIT_NOTE, MOVE_BETWEEN_LANES } from '../Note/NoteActions';
 // Initial State
 import omit from 'lodash/omit';
 
@@ -44,15 +44,15 @@ export default function lanes(state = initialState, action) {
     case MOVE_WITHIN_LANE: {
       const newLane = { ...state[action.laneId] };
       newLane.notes = moveNotes(newLane.notes, action.sourceId, action.targetId);
-      return { ...state, [action.laneId]: newLane};
+
+      return { ...state, [action.laneId]: newLane };
     }
     case MOVE_BETWEEN_LANES: {
       const targetLane = { ...state[action.targetLaneId] };
       targetLane.notes = [...targetLane.notes, action.noteId];
       const sourceLane = { ...state[action.sourceLaneId] };
       sourceLane.notes = sourceLane.notes.filter(noteId => noteId !== action.noteId);
-      return { ...state, [action.targetLaneId]: targetLane, [action.sourceLaneId]: sourceLane };
-    }
+      return { ...state, [action.targetLaneId]: targetLane, [action.sourceLaneId]: sourceLane }; }
     default:
       return state;
   }
